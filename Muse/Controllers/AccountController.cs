@@ -15,6 +15,7 @@ namespace Muse.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {
@@ -22,9 +23,10 @@ namespace Muse.Controllers
 
         public AccountController(UserManager<ApplicationUser> userManager)
         {
+            userManager.UserValidator = new UserValidator<ApplicationUser>(userManager) { AllowOnlyAlphanumericUserNames = false };
             UserManager = userManager;
         }
-
+        
         public UserManager<ApplicationUser> UserManager { get; private set; }
 
         //
@@ -45,7 +47,7 @@ namespace Muse.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.UserName, model.Password);
+                var user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
@@ -78,7 +80,7 @@ namespace Muse.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new ApplicationUser() { UserName = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -214,7 +216,7 @@ namespace Muse.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.DefaultUserName });
             }
         }
 
@@ -265,7 +267,7 @@ namespace Muse.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new ApplicationUser() { UserName = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

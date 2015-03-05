@@ -10,6 +10,7 @@ namespace Muse.Controllers
     {
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated) { return RedirectToAction(null, "MediaBrowser"); }
             return View();
         }
 

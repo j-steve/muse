@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Muse.Controllers
 {
-    public class BrowserController : Controller
+    public class MediaBrowserController : Controller
     {
         //
         // GET: /Browser/

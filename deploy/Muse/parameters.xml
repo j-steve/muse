@@ -1,0 +1,12 @@
+﻿<parameters>
+  <parameter name="IIS Web Application Name" defaultValue="Muse" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^c:\\users\\steve\\documents\\visual\ studio\ 2013\\Projects\\Muse\\Muse\\obj\\Debug\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^c:\\users\\steve\\documents\\visual\ studio\ 2013\\Projects\\Muse\\Muse\\obj\\Debug\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Deployment-Deployment Connection String" defaultValue="Data Source=muse-db.mssql.somee.com;Initial Catalog=muse-db;Persist Security Info=True;User ID=Steve580_SQLLogin_2;Password=pe6fnezw85;Packet Size=4096;Workstation ID=muse-db.mssql.somee.com" tags="SqlConnectionString">
+    <parameterEntry kind="ProviderPath" scope="DbFullSql" match="^c:\\users\\steve\\documents\\visual\ studio\ 2013\\Projects\\Muse\\Muse\\obj\\Debug\\AutoScripts\\DefaultConnection-Deployment_SchemaAndData\.sql$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\aspnet-Muse-20150304063337.mdf;Initial Catalog=aspnet-Muse-20150304063337;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="c:\\users\\steve\\documents\\visual\ studio\ 2013\\Projects\\Muse\\Muse\\obj\\Debug\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

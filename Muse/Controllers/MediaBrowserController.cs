@@ -1,18 +1,22 @@
-﻿using System;
+﻿using Muse.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc; 
+using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace Muse.Controllers
 {
     public class MediaBrowserController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         //
         // GET: /Browser/
         public ActionResult Index()
         {
-            ViewBag.Shows = GetTVShowList(); // new List<string> { "Starship", "Star Trek", "Star Wars" };//GetTVShowList();
+            ViewBag.Shows = new List<string> { "Starship", "Star Trek", "Star Wars" };//GetTVShowList();
             return View(); 
         }
 
@@ -32,6 +36,27 @@ namespace Muse.Controllers
             }
 
             return View(shows);
+
+        }
+
+        public ActionResult SelectTvShow(string tvdbID)
+        {
+            TvShow show = TvShow.GetByTvdbID(db, tvdbID);
+            if (show == null)
+            {
+                show = new TvShow();
+                string httpText = Common.GetHttpText("http://thetvdb.com/api/9244EC31A575C4E3/series/" + Url.Encode(tvdbID));
+                show.TVDB_ID = Common.Substring(httpText, "<id>", "</id>");
+                show.Name = Common.Substring(httpText, "<SeriesName>", "</SeriesName>");
+                show.FirstAired = Common.TryParseDateTime(Common.Substring(httpText, "<FirstAired>", "</FirstAired>")) ?? new DateTime();
+                show.Network = Common.Substring(httpText, "<Network>", "</Network>");
+            }
+
+            var userTvShow = new UserTvShow() { User = db.Users.Find(User.Identity.GetUserId()), TvShow = show };
+            db.UserTvShows.Add(userTvShow);
+            db.SaveChanges(); 
+
+            return RedirectToAction("Index");
 
         }
 

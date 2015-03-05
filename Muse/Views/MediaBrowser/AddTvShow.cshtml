@@ -7,7 +7,7 @@
 <h2>AddTvShow</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("« Cancel", "Index")
 </p>
 <table class="table">
     <tr>
@@ -35,11 +35,15 @@
             @Html.DisplayFor(modelItem => item.Network)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TVDB_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TVDB_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TVDB_ID })
+            @Html.ActionLink("Select", "SelectTvShow", new { tvdbID = item.TVDB_ID }, new { @class = "btn btn-default btn-xs" })
         </td>
     </tr>
 }
 
 </table>
+
+<style>
+    .table tr:hover {
+        background-color: rgb(229, 244, 255);
+    }
+</style>

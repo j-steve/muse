@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace Muse.Models
 {
@@ -9,12 +10,15 @@ namespace Muse.Models
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
+    { 
+
         public ApplicationDbContext()
             : base("DefaultConnection")
-        {
-        }
+        { }
 
-        public System.Data.Entity.DbSet<Muse.Models.TvShow> TvShows { get; set; }
+        public DbSet<Muse.Models.TvShow> TvShows { get; set; }
+
+        public DbSet<Muse.Models.UserTvShow> UserTvShows { get; set; }
     }
+
 }

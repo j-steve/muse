@@ -18,6 +18,8 @@ namespace Muse
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            System.Data.Entity.Database.SetInitializer<Models.ApplicationDbContext>(null); // prevent applicationdbcontext error, see http://goo.gl/0inPIz
         }
     }
 }

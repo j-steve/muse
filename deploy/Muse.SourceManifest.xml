@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<sitemanifest>
-  <DbFullSql path="c:\users\steve\documents\visual studio 2013\Projects\Muse\Muse\obj\Debug\AutoScripts\DefaultConnection-Deployment_SchemaAndData.sql" Transacted="True" />
-  <IisApp path="c:\users\steve\documents\visual studio 2013\Projects\Muse\Muse\obj\Debug\Package\PackageTmp" managedRuntimeVersion="v4.0" />
-  <setAcl path="c:\users\steve\documents\visual studio 2013\Projects\Muse\Muse\obj\Debug\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="c:\users\steve\documents\visual studio 2013\Projects\Muse\Muse\obj\Debug\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
-</sitemanifest>

@@ -6,13 +6,33 @@ using System.Web;
 
 namespace Muse.Models
 {
-    public class TvShow
+    public class UserTvShow
     {
         [Key]
-        [DataType(DataType.Text)]
-        [Display(Name = "TVDB ID")]
-        public string TVDB_ID {get; set; }
+        public int ID { get; set; }
 
+        [Required]
+        public ApplicationUser User { get; set; }
+
+        [Required]
+        public TvShow TvShow { get; set; }
+
+    }
+
+    public class TvShow
+    {
+        public static TvShow GetByTvdbID(ApplicationDbContext db, string tvdbID)
+        { 
+            return db.TvShows.Where(x => x.TVDB_ID == tvdbID).SingleOrDefault();
+        }
+
+        [Key]
+        public int ID { get; set; }
+
+        [System.Web.Mvc.HiddenInput(DisplayValue = false)]
+        public string TVDB_ID { get; set; }
+
+        [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Name")]
         public string Name { get; set; }

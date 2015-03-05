@@ -5,7 +5,113 @@
 <h3>@ViewBag.Message</h3>
 
 <a href="@Url.Action("AddShow")" class="btn btn-primary btn-large">Add Show +</a>
-<div>
+
+@Html.TextBox("TVShowName", null, new { data_provide = "shownames", autocomplete = "false", @class = "form-control typeahead tt-query" })
+<script>
+    var shownames = @Html.Raw(Json.Encode(ViewBag.Shows));
+</script>
+
+<div class="jumbotron" style="margin-top:15px;">
  
-</div>
-<p>Use this area to provide additional information.</p>
+</div> 
+
+<style type="text/css">
+    /*
+    .typeahead, .tt-query, .tt-hint {
+        border: 2px solid #CCCCCC;
+        border-radius: 8px;
+        font-size: 24px;
+        height: 30px;
+        line-height: 30px;
+        outline: medium none;
+        padding: 8px 12px;
+        width: 396px;
+    }
+
+    .typeahead {
+        background-color: #FFFFFF;
+    }
+        */
+
+    .typeahead:focus {
+        border: 2px solid #0097CF;
+    } 
+
+    .tt-query {
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    }
+
+    .tt-hint {
+        color: #999999;
+    }
+
+    .tt-dropdown-menu {
+        background-color: #FFFFFF;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        margin-top: 12px;
+        padding: 8px 0;
+        width: 422px;
+    }
+
+    .tt-suggestion {
+        font-size: 18px;
+        line-height: 18px;
+        padding: 3px 20px;
+    }
+
+        .tt-suggestion.tt-cursor {
+            cursor:pointer;
+            background-color: #0097CF;
+            color: #FFFFFF;
+        }
+
+        .tt-suggestion p {
+            margin: 0;
+        }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/typeahead")
+
+    <script>
+
+        var substringMatcher = function(strs) {
+            return function findMatches(q, cb) {
+                var matches, substrRegex;
+ 
+                // an array that will be populated with substring matches
+                matches = [];
+ 
+                // regex used to determine if a string contains the substring `q`
+                substrRegex = new RegExp(q, 'i');
+ 
+                // iterate through the pool of strings and for any string that
+                // contains the substring `q`, add it to the `matches` array
+                $.each(strs, function(i, str) {
+                    if (substrRegex.test(str)) {
+                        // the typeahead jQuery plugin expects suggestions to a
+                        // JavaScript object, refer to typeahead docs for more info
+                        matches.push({ value: str });
+                    }
+                });
+ 
+                cb(matches);
+            };
+        };
+
+        $(document).ready(function(){
+            $('.typeahead').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 3
+            },
+            {
+                name: 'states',
+                displayKey: 'value',
+                source: substringMatcher(shownames)
+            });            
+        });  
+    </script>
+}

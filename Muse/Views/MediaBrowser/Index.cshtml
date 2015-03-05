@@ -4,34 +4,20 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<a href="@Url.Action("AddShow")" class="btn btn-primary btn-large">Add Show +</a>
+@using (Html.BeginForm("AddTvShow", null))
+{
+    @Html.TextBox("TvShowName", null, new { data_provide = "shownames", placeholder = "Enter a TV series...", autocomplete = "false", @class = "form-control typeahead tt-query" })
 
-@Html.TextBox("TVShowName", null, new { data_provide = "shownames", autocomplete = "false", @class = "form-control typeahead tt-query" })
-<script>
-    var shownames = @Html.Raw(Json.Encode(ViewBag.Shows));
-</script>
-
+    <button type="submit" class="btn btn-primary btn-large">Add Show +</button>
+}
 <div class="jumbotron" style="margin-top:15px;">
  
 </div> 
 
-<style type="text/css">
-    /*
-    .typeahead, .tt-query, .tt-hint {
-        border: 2px solid #CCCCCC;
-        border-radius: 8px;
-        font-size: 24px;
-        height: 30px;
-        line-height: 30px;
-        outline: medium none;
-        padding: 8px 12px;
-        width: 396px;
-    }
 
-    .typeahead {
-        background-color: #FFFFFF;
-    }
-        */
+
+
+<style type="text/css">
 
     .typeahead:focus {
         border: 2px solid #0097CF;
@@ -100,7 +86,9 @@
                 cb(matches);
             };
         };
-
+        
+        
+        var shownames = @Html.Raw(Json.Encode(ViewBag.Shows)); 
         $(document).ready(function(){
             $('.typeahead').typeahead({
                 hint: true,
@@ -112,6 +100,6 @@
                 displayKey: 'value',
                 source: substringMatcher(shownames)
             });            
-        });  
+        });
     </script>
 }

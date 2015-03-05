@@ -14,5 +14,7 @@ namespace Muse.Models
             : base("DefaultConnection")
         {
         }
+
+        public System.Data.Entity.DbSet<Muse.Models.TvShow> TvShows { get; set; }
     }
 }

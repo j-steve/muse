@@ -16,6 +16,7 @@ namespace Muse.Controllers
 
         public ActionResult About()
         {
+            throw new Exception("sup");
             ViewBag.Message = "Your application description page.";
 
             return View();

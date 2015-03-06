@@ -8,10 +8,17 @@
 <div class="jumbotron" style="margin-top:15px;">
     @foreach (Muse.Models.TvEpisode episode in Model)
     {
-        <div style="display:inline-block;">
-            <h3>@String.Format("{0}x{1} {2}", episode.SeasonNumber, episode.EpisodeNumber, episode.Name)</h3>
-            @if (!string.IsNullOrEmpty(episode.ImageUrl)) { <img src="@episode.ImageUrl" style="height:100px;"/> }
-            <span>@episode.Description</span>
+        <div class="thumbnail" style="display:inline-block; width:300px;">
+
+            <div class="caption">
+                <h3 style="margin:0px;">
+                    @String.Format("{0}x{1} {2}", episode.SeasonNumber, episode.EpisodeNumber, episode.Name)
+                </h3>
+            </div>
+            @if (!string.IsNullOrEmpty(episode.ImageUrl)) { <img src="@episode.ImageUrl" style="height:100px;" /> }
+            <div class="caption">
+                <p style="font-size:11px;">@episode.Description</p>
+            </div>
         </div>
     }
 </div> 

@@ -39,12 +39,15 @@ namespace Muse.Models
 
         [DataType(DataType.Date)] 
         [Display(Name = "First Aired")]
-        public DateTime FirstAired { get; set; }
+        public DateTime? FirstAired { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Network")]
         public string Network { get; set; }
 
+        public string ImageUrl { get; set; }
+
+        //public List<TvEpisode> Episodes { get; set; }
 
         public TvShow () { }
 

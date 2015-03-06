@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Muse.Models.TvEpisode>
+@{
+    ViewBag.Title = "TvShowEpisodes";
+}
+
+<h2>Tv Show Episodes</h2>
+
+<div class="jumbotron" style="margin-top:15px;">
+    @foreach (Muse.Models.TvEpisode episode in Model)
+    {
+        <div style="display:inline-block;">
+            <h3>@String.Format("{0}x{1} {2}", episode.SeasonNumber, episode.EpisodeNumber, episode.Name)</h3>
+            @if (!string.IsNullOrEmpty(episode.ImageUrl)) { <img src="@episode.ImageUrl" style="height:100px;"/> }
+            <span>@episode.Description</span>
+        </div>
+    }
+</div> 
+
+

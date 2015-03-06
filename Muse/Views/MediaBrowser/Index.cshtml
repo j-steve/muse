@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Muse.Models.TvShow>
+@{
     ViewBag.Title = "Media Browser";
 }
 <h2>@ViewBag.Title.</h2>
@@ -11,7 +12,10 @@
     <button type="submit" class="btn btn-primary btn-large">Add Show +</button>
 }
 <div class="jumbotron" style="margin-top:15px;">
- 
+    @foreach (Muse.Models.TvShow show in Model)
+    {  
+        <a href="@Url.Action("TvShowEpisodes", show)"><div>@show.Name</div></a>
+    }
 </div> 
 
 

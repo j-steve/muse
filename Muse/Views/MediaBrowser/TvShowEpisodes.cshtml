@@ -15,12 +15,51 @@
                     @String.Format("{0}x{1} {2}", episode.SeasonNumber, episode.EpisodeNumber, episode.Name)
                 </h3>
             </div>
-            @if (!string.IsNullOrEmpty(episode.ImageUrl)) { <img src="@episode.ImageUrl" style="height:100px;" /> }
+                @if (!string.IsNullOrEmpty(episode.ImageUrl))
+                { 
+                    <img src="@episode.ImageUrl" style="height:100px;" /> 
+                }
+                else
+                {
+                    <div style="height:100px;"></div>
+                }
             <div class="caption">
                 <p style="font-size:11px;">@episode.Description</p>
             </div>
         </div>
     }
 </div> 
+
+<style>
+
+    .thumbnail:hover {
+        background-color: rgb(229, 244, 255);
+        cursor:pointer;
+    }
+    
+     .caption h3 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .caption p {
+        height: 100px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        /* white-space: initial; */
+        display: block;
+        display: -webkit-box;
+        max-width: 400px;
+        height: 108px;
+        margin: 0 auto;
+        font-size: 26px;
+        line-height: 1.4;
+        -webkit-line-clamp: 7;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
 
 

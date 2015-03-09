@@ -1,20 +1,20 @@
-﻿@model IEnumerable<Muse.Models.TvShow>
+﻿@model IEnumerable<Muse.Models.UserTvShow>
 @{
     ViewBag.Title = "Media Browser";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-@using (Html.BeginForm("AddTvShow", null))
+@using (Html.BeginForm("SearchTvShowToAdd", null))
 {
     @Html.TextBox("TvShowName", null, new { data_provide = "shownames", placeholder = "Enter a TV series...", autocomplete = "false", @class = "form-control typeahead tt-query" })
 
     <button type="submit" class="btn btn-primary btn-large">Add Show +</button>
 }
 <div class="jumbotron" style="margin-top:15px;">
-    @foreach (Muse.Models.TvShow show in Model)
+    @foreach (Muse.Models.UserTvShow show in Model)
     {  
-        <a href="@Url.Action("TvShowEpisodes", show)"><div>@show.Name</div></a>
+        <a href="@Url.Action("TvShowEpisodes", show)"><div>@show.TvShow.Name</div></a>
     }
 </div> 
 

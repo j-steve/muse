@@ -203,6 +203,22 @@
     <Compile Include="Migrations\201503060328363_EpsButNo.Designer.cs">
       <DependentUpon>201503060328363_EpsButNo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503082040096_AddWatchedEps.cs" />
+    <Compile Include="Migrations\201503082040096_AddWatchedEps.Designer.cs">
+      <DependentUpon>201503082040096_AddWatchedEps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503082104487_RemoveWatchedEps.cs" />
+    <Compile Include="Migrations\201503082104487_RemoveWatchedEps.Designer.cs">
+      <DependentUpon>201503082104487_RemoveWatchedEps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503082144332_AddWatchedEpTable.cs" />
+    <Compile Include="Migrations\201503082144332_AddWatchedEpTable.Designer.cs">
+      <DependentUpon>201503082144332_AddWatchedEpTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503090104157_AddAirTime.cs" />
+    <Compile Include="Migrations\201503090104157_AddAirTime.Designer.cs">
+      <DependentUpon>201503090104157_AddAirTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -263,7 +279,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\MediaBrowser\Index.cshtml" />
-    <Content Include="Views\MediaBrowser\AddTvShow.cshtml" />
+    <Content Include="Views\MediaBrowser\SearchTvShowToAdd.cshtml" />
     <Content Include="Views\Test2\Create.cshtml" />
     <Content Include="Views\Test2\Delete.cshtml" />
     <Content Include="Views\Test2\Details.cshtml" />
@@ -290,6 +306,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503060328363_EpsButNo.resx">
       <DependentUpon>201503060328363_EpsButNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503082040096_AddWatchedEps.resx">
+      <DependentUpon>201503082040096_AddWatchedEps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503082104487_RemoveWatchedEps.resx">
+      <DependentUpon>201503082104487_RemoveWatchedEps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503082144332_AddWatchedEpTable.resx">
+      <DependentUpon>201503082144332_AddWatchedEpTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503090104157_AddAirTime.resx">
+      <DependentUpon>201503090104157_AddAirTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

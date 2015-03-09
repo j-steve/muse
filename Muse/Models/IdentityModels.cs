@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using Muse.Models;
 
 namespace Muse.Models
 {
@@ -16,9 +17,11 @@ namespace Muse.Models
             : base("DefaultConnection")
         { }
 
-        public DbSet<Muse.Models.TvShow> TvShows { get; set; }
+        public DbSet<TvShow> TvShows { get; set; }
 
-        public DbSet<Muse.Models.UserTvShow> UserTvShows { get; set; }
+        public DbSet<UserTvShow> UserTvShows { get; set; }
+
+        public DbSet<UserTvEpisode> UserTvEpisodes { get; set; }
     }
 
 }

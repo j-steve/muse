@@ -6,16 +6,19 @@ using System.Web;
 
 namespace Muse.Models
 {
+    /// <summary>
+    /// A TV show which the user has added to their list of shows.
+    /// </summary>
     public class UserTvShow
     {
         [Key]
         public int ID { get; set; }
 
         [Required]
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [Required]
-        public TvShow TvShow { get; set; }
+        public virtual TvShow TvShow { get; set; }
 
     }
 
@@ -40,6 +43,10 @@ namespace Muse.Models
         [DataType(DataType.Date)] 
         [Display(Name = "First Aired")]
         public DateTime? FirstAired { get; set; }
+
+        [DataType(DataType.Time)] 
+        [Display(Name = "Time")]
+        public DateTime? AirTime { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Network")]

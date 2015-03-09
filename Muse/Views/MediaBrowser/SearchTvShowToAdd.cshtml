@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Muse.Models.TvShow>
 
 @{
-    ViewBag.Title = "AddTvShow";
+    ViewBag.Title = "Select TV Show to Add";
 }
 
-<h2>AddTvShow</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("« Cancel", "Index")
@@ -35,7 +35,7 @@
             @Html.DisplayFor(modelItem => item.Network)
         </td>
         <td>
-            @Html.ActionLink("Select", "SelectTvShow", new { tvdbID = item.TVDB_ID }, new { @class = "btn btn-default btn-xs" })
+            @Html.ActionLink("Select", "SelectTvShowToAdd", new { tvdbID = item.TVDB_ID }, new { @class = "btn btn-default btn-xs" })
         </td>
     </tr>
 }

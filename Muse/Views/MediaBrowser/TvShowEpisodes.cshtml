@@ -5,39 +5,47 @@
 
 <h2>Tv Show Episodes</h2>
 
-<div class="jumbotron" style="margin-top:15px;">
+<div id="episodes" class="jumbotron" style="margin-top:15px;">
     @foreach (Muse.Models.TvEpisode episode in Model)
-    {
-        <div class="thumbnail" style="display:inline-block; width:300px;">
+{
+    <div class="episode thumbnail @(episode.Watched ? "seen" : "unseen")" data-tvdb-id="@episode.TVDB_ID">
 
-            <div class="caption">
-                <h3 style="margin:0px;">
-                    @String.Format("{0}x{1} {2}", episode.SeasonNumber, episode.EpisodeNumber, episode.Name)
-                </h3>
-            </div>
-                @if (!string.IsNullOrEmpty(episode.ImageUrl))
-                { 
-                    <img src="@episode.ImageUrl" style="height:100px;" /> 
-                }
-                else
-                {
-                    <div style="height:100px;"></div>
-                }
-            <div class="caption">
-                <p style="font-size:11px;">@episode.Description</p>
-            </div>
+        <div class="caption">
+            <h3 style="margin:0px;">
+                @String.Format("{0}x{1} {2}", episode.SeasonNumber, episode.EpisodeNumber, episode.Name)
+            </h3>
         </div>
-    }
+        @if (!string.IsNullOrEmpty(episode.ImageUrl))
+        {
+            <img src="@episode.ImageUrl" style="height:100px;" />
+        }
+        else
+        {
+            <div style="height:100px;"></div>
+        }
+        <div class="caption">
+            <p style="font-size:11px;">@episode.Description</p>
+        </div>
+        <div class="air-date" title="@(episode.FirstAired.HasValue ? episode.FirstAired.Value.ToShortDateString() : null)">
+            @episode.FirstAiredPrettified
+        </div> 
+        <div class="seen-checkmark">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        </div>
+    </div>
+}
 </div> 
+
+<div style="position:fixed; bottom:0px; width:100%; padding:0px; padding-right:30px;" class="container">
+    <div id="changes-button-panel" style="width: 100%; padding: 10px 25px; display: none; border: 1px solid black; border-bottom: none;">
+        <button class="btn btn-primary btn-xl" style="float:right;" onclick="MarkWatched();">Mark as Watched</button>
+        <div style="clear:both;"></div>
+    </div>
+</div>
 
 <style>
 
-    .thumbnail:hover {
-        background-color: rgb(229, 244, 255);
-        cursor:pointer;
-    }
-    
-     .caption h3 {
+    .caption h3 {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -60,6 +68,106 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    .episode {
+        position: relative;
+        display: inline-block;
+        width: 300px;
+        border: 1px solid rgb(157, 157, 157);
+        margin: 5px;
+    }
+
+        .episode air-date {
+            position: absolute;
+            bottom: 0px;
+            left: 15px;
+        }
+
+        .episode .seen-checkmark {
+            position: absolute;
+            bottom: 0px;
+            right: 15px;
+        }
+
+        .episode.seen {
+            background: rgb(175, 211, 174);
+            opacity: 0.4;
+        } 
+
+
+        .episode.unseen { }
+
+            .episode.unseen:hover {
+                background: #C7D4E0;
+                cursor: pointer;
+                border-color: black;
+            }
+
+            .episode.unseen.ui-selecting {
+                background: #C7D4E0;
+                border-color: black;
+            }
+
+            .episode.unseen.ui-selected {
+                background: rgb(245, 242, 177);
+                border-color: black;
+            }
+
+            .episode.unseen .seen-checkmark {
+                display: none;
+            }
+
+
+    #changes-button-panel {
+        background: rgb(245, 242, 177);
+    }
+
 </style>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+@section Scripts {
+    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    <script>
 
+        $('#episodes, #selectable').selectable({
+            //cancel: ".seen",
+            selected: function (event, ui) {
+                $('#changes-button-panel').toggle(true); 
+            },
+            unselected: function (event, ui) {
+                if ($(".episode.ui-selected").length == 0) {
+                    $('#changes-button-panel').toggle(false);
+                }
+            }
+        });
+
+        function MarkWatched() {
+            var selectedEpisodes = $(".episode.ui-selected.unseen");
+
+            // Get list of TVDB IDs for all selected episodes.
+            var tvdbIDs = selectedEpisodes.map(function () {
+                return $(this).data('tvdb-id');
+            }).get();
+
+            // Execute AJAX call to update episode status.
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ToggleWatched")',
+                data: { episodeTvdbIDs: tvdbIDs }
+            });
+
+            // Update UI to mark selected episodes as watched.
+            selectedEpisodes.removeClass('unseen ui-selected').addClass('seen');
+            $('#changes-button-panel').toggle(false);
+        }
+
+        $(function () {
+            setTimeout(function () {
+                $('html, body').animate({
+                    scrollTop: $('.episode.unseen').first().offset().top - 100
+                }, 100)
+            }, 1000);
+        });
+
+    </script>
+}

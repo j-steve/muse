@@ -91,19 +91,21 @@
             };
         };
         
-        
-        var shownames = @Html.Raw(Json.Encode(ViewBag.Shows)); 
-        $(document).ready(function(){
-            $('.typeahead').typeahead({
-                hint: true,
-                highlight: true,
-                minLength: 3
-            },
-            {
-                name: 'states',
-                displayKey: 'value',
-                source: substringMatcher(shownames)
-            });            
+         
+        // Add typeahead to search box by getting a list of all TV show names via AJAX.
+        $(function(){
+            $.getJSON('@Url.Action("GetTvShowList")', null, function (jsonResult) {
+                $('.typeahead').typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 3
+                },
+                {
+                    name: 'states',
+                    displayKey: 'value',
+                    source: substringMatcher(jsonResult)
+                }); 
+            });
         });
     </script>
 }

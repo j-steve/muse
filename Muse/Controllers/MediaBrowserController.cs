@@ -17,12 +17,15 @@ namespace Muse.Controllers
         // GET: /Browser/
         public ActionResult Index()
         {
-            ViewBag.Shows = GetTVShowList();
-
             var userID = User.Identity.GetUserId();
             var shows = db.UserTvShows.Where(x => x.User.Id == userID); 
 
             return View(shows); 
+        }
+
+        public ActionResult GetTvShowList()
+        {
+            return Json(GetTVShowList(), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>

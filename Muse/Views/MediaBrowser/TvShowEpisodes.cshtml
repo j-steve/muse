@@ -27,7 +27,7 @@
             <p style="font-size:11px;">@episode.Description</p>
         </div>
         <div class="air-date" title="@(episode.FirstAired.HasValue ? episode.FirstAired.Value.ToShortDateString() : null)">
-            @episode.FirstAiredPrettified
+            @(episode.FirstAiredPrettified ?? "---")
         </div> 
         <div class="seen-checkmark">
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -52,18 +52,17 @@
     }
 
     .caption p {
-        height: 100px;
+        height: 45px;
         text-overflow: ellipsis;
         overflow: hidden;
         /* white-space: initial; */
         display: block;
         display: -webkit-box;
-        max-width: 400px;
-        height: 108px;
+        max-width: 400px; 
         margin: 0 auto;
         font-size: 26px;
         line-height: 1.4;
-        -webkit-line-clamp: 7;
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -77,10 +76,10 @@
         margin: 5px;
     }
 
-        .episode air-date {
-            position: absolute;
-            bottom: 0px;
-            left: 15px;
+        .episode .air-date {
+            margin-left:8px;
+            font-size:14px;
+            height:20px;
         }
 
         .episode .seen-checkmark {
